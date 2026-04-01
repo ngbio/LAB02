@@ -1,4 +1,4 @@
-pipline {
+pipeline  {
     agent {
         docker {
             image 'node:18-alpine'
@@ -6,14 +6,13 @@ pipline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('Install') {
             steps {
-                git ''
+                sh 'npm install'
             }
         }
         stage('Build') {
             steps {
-                sh 'npm install'
                 sh 'npm run build'
             }
         }
@@ -24,17 +23,17 @@ pipline {
         }
         stage('Deploy') {
             steps {
-                sh 'echo "Deploying..."'
+                sh 'echo "Deploying (demo only)..."'
             }
         }
     }
 
     post {
         success {
-            echo 'Build succeeded!'
+            echo 'Pipline succeeded!'
         }
         failure {
-            echo 'Build failed.'
+            echo 'Pipline failed.'
         }
     }
 }
